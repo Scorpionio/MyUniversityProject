@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Processor>
+
+@foreach (var item in Model)
+{ 
+    <div class="main__item">
+        <img src="img/@item.ImgSrc" alt="photo_@item.ImgSrc" class="main__item-img">
+        <div class="main__item-line"></div>
+        <div class="main__item-inner">
+            <div class="main__item-box">
+                <div class="main__item-info">
+                    <h4 class="main__item-title">@item.Name</h4>
+                    <p class="main__item-price">@item.Price руб.</p>
+                </div>
+                <a class="main__item-button" asp-controller="Catalog" asp-action="ProcessorDetails" asp-route-id="@item.Id">
+                    <img src="./img/icons/arrow-right-black.svg" alt="arrow">
+                </a>
+            </div>
+        </div>
+        <a class="button" style="@ViewData["Hidden"]" asp-controller="Catalog" asp-action="DeleteItem" asp-route-id="@item.Id">
+            Удалить
+        </a>
+    </div>
+}

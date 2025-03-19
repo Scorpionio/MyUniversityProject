@@ -1,0 +1,25 @@
+﻿@model Web.Models.Processor
+
+<div class="main__item item-delails">
+    <h1 class="item-delails__title">Описание процессора</h1>
+    <div class="item-delails__box">
+        <img src="~/img/@Model.ImgSrc" alt="photo_@Model.ImgSrc" class="main__item-img">
+        <!--<div class="main__item-line"></div>-->
+        <div class="main__item-inner">
+            <div class="main__item-box">
+                <ul class="main__item-info">
+                    <li class="item-delails__list-item">Название: @Model.Name</li>
+                    <li class="item-delails__list-item">Цена: @Model.Price</li>
+                    <li class="item-delails__list-item">Кол-во ядер: @Model.Cores</li>
+                    <li class="item-delails__list-item">Кол-во потоков: @Model.Threads</li>
+                </ul>
+            </div>
+            <a class="button" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">
+                Добавить в корзину
+            </a>
+            <a class="button" style="@ViewData["Hidden"]" asp-controller="Catalog" asp-action="EditProcessor" asp-route-id="@Model.Id">
+                Изменить
+            </a>
+        </div>
+    </div>
+</div>

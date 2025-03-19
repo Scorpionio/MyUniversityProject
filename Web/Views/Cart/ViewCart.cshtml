@@ -1,0 +1,58 @@
+﻿@model Cart
+<h1 style="margin-bottom: 10px">Корзина</h1>
+<h2 class="text-success" style="margin-bottom: 10px">@(ViewBag.CartMessage)</h2>
+
+<div class="main__goods">
+    @foreach (var item in Model.CartItems)
+    {
+        <div class="main__item">
+            <p>Количество: @item.Quantity</p>
+            <img src="~/img/@item.Device.ImgSrc" alt="photo_@item.Device.ImgSrc" class="main__item-img">
+            <div class="main__item-line"></div>
+            <div class="main__item-inner">
+                <div class="main__item-box">
+                    <div class="main__item-info">
+                        <h4 class="main__item-title">@item.Device.Name</h4>
+                        <p class="main__item-price">@item.Device.Price руб.</p>
+                    </div>
+                    <div class="main__item-info">
+
+                    </div>
+                </div>
+            </div>
+            <a class="button" asp-controller="Cart" asp-action="RemoveItem" asp-route-id="@item.Device.Id">Удалить</a>
+        </div>
+    }
+</div>
+<div class="main__cart-box">
+    <p class="main__cart-text">Итого:</p>
+    <p class="main__cart-price">@Model.TotalPrice?.ToString("C")</p>
+</div>
+<a class="button" asp-controller="Home" asp-action="Index">Купить</a>
+<!--
+<table>
+    <thead>
+    	<tr>
+    		<th>Имя</th>
+    		<th>Цена</th>
+    		<th>Количество</th>
+    		<th>Общая цена</th>
+    	</tr>
+    </thead>
+    <tbody>
+    	
+    	<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td>Итого:</td>
+    		<td>@Model.TotalPrice?.ToString("C")</td>
+    		<td></td>
+    	</tr>
+    </tbody>
+</table>
+-->
+
+<!--
+<button asp-controller="Cart" asp-action="PurchareItem">Purchare</button>
+-->

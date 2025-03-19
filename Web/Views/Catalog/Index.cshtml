@@ -1,0 +1,32 @@
+﻿@model ViewModel
+
+<a class="button" style="@ViewData["Hidden"]" asp-controller="Catalog" asp-action="Create">
+    Добавить
+</a>
+<div class="main__user" style="@ViewData["HiddenUser"]">
+    <p class="main__user-text">
+        Добро пожаловать, @ViewData["User"]
+    </p>
+    <a class="main__user-button" asp-controller="Account" asp-action="Logout">
+        Выход
+    </a>
+</div>
+<h1 class="main-title">Каталог</h1>
+<div class="main__inner">
+    <div class="main__block">
+        <div class="main__block-info">
+            <h2 class="main__block-title">Процессоры <img src="./img/icons/arrow-down-white.svg" alt="down arrow"></h2>
+        </div>
+        <div class="main__goods">
+            @Html.Partial("ProcessorList", Model.Processors)
+        </div>
+    </div>
+    <div class="main__block">
+        <div class="main__block-info">
+            <h2 class="main__block-title">Видеокарты<img src="./img/icons/arrow-down-white.svg" alt="down arrow"></h2>
+        </div>
+        <div class="main__goods">
+            @Html.Partial("GraphicCardList", Model.GraphicCards)
+        </div>
+    </div>
+</div>

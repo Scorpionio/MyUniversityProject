@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header--deco"></div>
+            <div class="container">
+                <div class="header__inner">
+                    <a class="header__logo" href="#">
+                        <img src="~/img/logo.jpg" alt="logo">
+                    </a>
+                    <nav class="header__nav">
+                        <ul class="header__list">
+                            <li class="header__item">
+                                <a href="/Home" class="header__link">Главная</a>
+                            </li>
+                            <li class="header__item">
+                                <a href="/Catalog" class="header__link">Каталог</a>
+                            </li>
+                        </ul>
+                        <div class="header__profile">
+                            <a class="header__cart" asp-controller="Cart" asp-action="ViewCart">
+                                <img src="~/img/icons/cart.svg" alt="cart">
+                            </a>
+                            <a class="header__user" asp-controller="Account" asp-action="Login">
+                                <img src="~/img/icons/user.svg" alt="user">
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer--deco"></div>
+            <div class="container">
+                <div class="footer__inner">
+                    <p class="footer__text">Все права защищены</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

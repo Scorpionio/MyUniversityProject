@@ -1,0 +1,30 @@
+﻿@model Web.Models.Processor
+
+<div class="form__inner">
+    <h2 class="form__title">Редактирование процессора</h2>
+    <form class="form__box" asp-action="UpdateProcessor" asp-controller="Catalog" asp-route-id="@Model.Id">
+        <div>
+            <label asp-for="Name">Название</label>
+            <input value="@Model.Name" type="text" asp-for="Name" />
+        </div>
+        <div>
+            <label asp-for="Price">Цена</label>
+            <input value="@Model.Price" asp-for="Price" type="number" step="0.01" />
+        </div>
+        <div>
+            <label asp-for="ImgSrc">Изображение</label>
+            <input value="@Model.ImgSrc" asp-for="ImgSrc" type="file" />
+        </div>
+        <div>
+            <label asp-for="Cores">Количество ядер</label>
+            <input value="@Model.Cores" asp-for="Cores" type="number" step="1" />
+        </div>
+        <div>
+            <label asp-for="Threads">Количество потоков</label>
+            <input value="@Model.Threads" asp-for="Threads" type="number" step="1" />
+        </div>
+        <p>
+            <input class="button" type="submit" value="Изменить" />
+        </p>
+    </form>
+</div>

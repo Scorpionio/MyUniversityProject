@@ -1,0 +1,24 @@
+﻿@model GraphicCard
+
+<div class="form__inner">
+    <h2 class="form__title">Добавить видеокарту</h2>
+    <form class="form__box" asp-action="CreateGraphicCard" method="post">
+        <div>
+            <label asp-for="Name">Название</label>
+            <input type="text" asp-for="Name" />
+        </div>
+        <div>
+            <label asp-for="Price">Цена</label>
+            <input asp-for="Price" type="number" step="0.01" />
+        </div>
+        <div>
+            <label asp-for="ImgSrc">Изображение</label>
+            <input asp-for="ImgSrc" type="file" />
+        </div>
+        <div>
+            <label asp-for="MemoryCapacity">Видеопамять</label>
+            <input asp-for="MemoryCapacity" type="number" step="1" />
+        </div>
+        <button class="button" type="submit">Добавить видеокарту</button>
+    </form>
+</div>
