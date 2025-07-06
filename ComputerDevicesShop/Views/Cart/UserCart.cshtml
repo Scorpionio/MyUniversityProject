@@ -1,0 +1,36 @@
+﻿@model Cart
+
+<h1 style="margin-bottom: 10px">Корзина</h1>
+<h2 class="text-success" style="margin-bottom: 10px">@(ViewBag.CartMessage)</h2>
+
+@if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
+    {
+        <div class="main__goods">
+            @foreach (var item in Model.CartDetails)
+            {
+                <div class="main__item">
+                    <img src="~/img/" alt="Фото товара" class="main__item-img">
+                    <div class="main__item-line"></div>
+                    <div class="main__item-inner">
+                        <div class="main__item-box">
+                            <div class="main__item-info">
+                                <h4 class="main__item-title">Название: @item.Device.Name</h4>
+                                <p class="main__item-price">Цена: @item.Device.Price руб.</p>
+                                <p class="main__item-price">Количество: @item.Quantity</p>
+                            </div>
+                            <div class="main__item-info">
+                            </div>
+                        </div>
+                    </div>
+                <a class="button" asp-controller="Cart" asp-action="AddItem" asp-route-id="@item.Device.DeviceId">Добавить предмет</a>
+                    <a class="button" asp-controller="Cart" asp-action="DeleteItem" asp-route-id="@item.Device.DeviceId">Удалить предмет</a>
+                </div>
+            }
+        </div>
+        <h2 style="padding: 5px 10px; background-color: #444444; max-width: max-content; width: 100%; border-radius: 5px">Общая сумма заказа: @(Model.CartDetails.Select(item => item.UnitPrice * item.Quantity).Sum())</h2>
+        <a class="button" asp-controller="Cart" asp-action="Checkout">Купить всё</a>
+}
+else
+{
+    <h5>Корзина пуста</h5>
+}

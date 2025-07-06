@@ -1,0 +1,86 @@
+﻿@model ComputerDevicesShop.Models.DTOs.CatalogDTO
+@{
+    var UserAuth = ViewBag.UserAuth as string;
+}
+
+<!--
+<a class="button" style="@ViewData["Hidden"]" asp-controller="Catalog" asp-action="Create">
+    Добавить
+</a>
+-->
+
+<h1 class="main-title">Каталог</h1>
+
+<form method="get" asp-action="Index" class="block">
+    <div>
+        <p>* Фильтрация</p>
+        <div class="col-12">
+            <label class="visually-hidden" for="categoryId  ">Фильтрация по категории:</label>
+            <select class="form-select" id="categoryId" name="categoryId">
+                <option selected value="0">Категория</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option selected="@(category.CategoryId == Model.CategoryId)" value="@category.CategoryId">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-12">
+            <label class="visually-hidden" for="sterm">Фильтрация по названию:</label>
+            <input type="text" value="@Model.STerm" id="sterm" name="sterm" />
+        </div>
+    </div>
+
+    <div>
+        <p>* Сортировка</p>
+        <div class="col-12">
+            <label class="visually-hidden" for="sortInfo  ">Выбор сотрировки:</label>
+            <select class="form-select" id="sortInfo" name="sortInfo">
+                <option selected value="Standart" >Стандарт</option>
+                <option value="By_price_down">Убывание цены</option>
+                <option value="By_price_up">Возрастание цены</option>
+                <option value="By_rate_down">Убывание рейтинга</option>
+                <option value="By_rate_up">Возрастание рейтинга</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Подтвердить</button>
+    </div>
+</form>
+
+<div class="main__inner">
+    <div class="main__block">
+        <div class="main__block-info">
+            <h2 class="main__block-title">Товары<img src="./img/icons/arrow-down-white.svg" alt="down arrow"></h2>
+        </div>
+        <div class="main__goods">
+            @foreach (var item in Model.Devices)
+            {
+                <div class="main__item">
+                    <div class="main__goods-rate" style="display: flex; gap:5px">
+                        <img src="~/img/icons/star.svg" style="width:20px; height:20px" />
+                        <p> @item.Rate</p>
+                    </div>
+                    <img src="#" alt="Фото товара" class="main__item-img">
+                    <div class="main__item-line"></div>
+                    <div class="main__item-inner">
+                        <div class="main__item-box">
+                            <div class="main__item-info">
+                                <h4 class="main__item-title">Название: @item.Name</h4>
+                                <p class="main__item-price">Цена: @item.Price руб.</p>
+                            </div>
+                            <a class="main__item-button" asp-controller="Home" asp-action="DeviсeCard" asp-route-id="@item.DeviceId">
+                                <img src="./img/icons/arrow-right-black.svg" alt="arrow">
+                            </a>
+                        </div>
+                    </div>
+                    <!--
+                    <a class="button" style="@ViewData["Hidden"]" asp-controller="Home" asp-action="DeleteItem" asp-route-id="">
+                        Удалить
+                    </a>
+                    -->
+                </div>
+            }
+        </div>
+    </div>
+</div>

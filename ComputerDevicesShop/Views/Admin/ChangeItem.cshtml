@@ -1,0 +1,50 @@
+﻿@model ComputerDevicesShop.Models.DTOs.AddDeviceDTO
+
+<div class="form__inner">
+    <h2 class="form__title">Изменить устройство</h2>
+    <form class="form__box" asp-action="ChangeItem" asp-controller="Admin" asp-anti-forgery="true" enctype="multipart/form-data">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="acconut__input">
+            <div class="form-group form-valid">
+                <label asp-for="AddDeviceModel.Name">Введите название устройства</label>
+                <input type="text" asp-for="AddDeviceModel.Name" />
+                <span asp-validation-for="AddDeviceModel.Name"></span>
+            </div>
+            <div class="form-group form-valid">
+                <label asp-for="AddDeviceModel.Price">Введите цену</label>
+                <input type="number" asp-for="AddDeviceModel.Price" step="any" />
+                <span asp-validation-for="AddDeviceModel.Price"></span>
+            </div>
+            <div class="form-group form-valid">
+                <label class="visually-hidden" for="categoryId">Выберите категорию:</label>
+                <select class="form-select" id="categoryId" name="categoryId">
+                    <option value="0" disabled selected>Категория</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        if (category.CategoryId == Model.CategoryId)
+                        {
+                            <option value="@category.CategoryId" selected>@category.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@category.CategoryId">@category.Name</option>
+                        }
+}                   }
+                </select>
+            </div>
+            <div class="form-group form-valid">
+                <label asp-for="AddDeviceModel.Description">Введите описание</label>
+                <input type="text" asp-for="AddDeviceModel.Description" />
+                <span asp-validation-for="AddDeviceModel.Description"></span>
+            </div>
+            <div class="form-group form-valid">
+                <label asp-for="AddDeviceModel.Image">Можете выбрать изображение</label>
+                <input type="file" asp-for="AddDeviceModel.Image" />
+                <span asp-validation-for="AddDeviceModel.Image"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Изменить" class="button" />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿@model ICollection<Order>
+@{
+    var UserAuth = ViewBag.UserAuth as string;
+}
+
+<div class="toCenter">
+    <div class="block order">
+        <h1>Список заказов:</h1>
+        <div class ="order__user-info">
+            @foreach (var order in Model)
+            {
+                <div class="order-info">
+                    <div class="order-info__main-info">
+                        <p>Название заказа: @order.Name</p>
+                        <p>Почта заказа: @order.Email</p>
+                        <p>Дата заказа: @order.CreateDate.ToString("dd-MM-yyyy")</p>
+                        <p>Статус заказа: @order.OrderStatus.StatusName</p>
+                    </div>
+                    @foreach (var item in order.OrderDetail)
+                    {
+                        <ul class="order__user-goods">
+                            <li>Название товара: @item.Device.Name</li>
+                            <li>Категория товара: @item.Device.Category.Name</li>
+                            <li>Количество: @item.Quantity</li>
+                            <li>Цена товара: @item.UnitPrice</li>
+                            <li>Сумма за товар: @(item.Quantity * item.UnitPrice)</li>
+
+                        </ul>
+                    }
+                    <h2>Общая сумма заказа: @(order.OrderDetail.Select(item => item.UnitPrice * item.Quantity).Sum())</h2>
+                    @if (order.OrderStatus.StatusName != "Доставлено" && order.OrderStatus.StatusName != "Возврат")
+                    {
+                        <form asp-controller="Order" asp-action="ReturnOrder" method="post">
+                            <input type="hidden" name="id" value="@order.OrderId" />
+                            <button type="submit" class="button">Отменить</button>
+                        </form>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model ComputerDevicesShop.Models.DTOs.AddGoods
+
+<form method="get" asp-controller="Admin" asp-action="AddGoods" class="block">
+    <div>
+        <p>Добавить кол-во товара</p>
+        <div class="col-12">
+            <label class="visually-hidden" for="StockId">Выбрать товар:</label>
+            <select class="form-select" id="StockId" name="StockId">
+                <option selected value="0">Склад:</option>
+                @foreach (var stock in Model.Stocks)
+                {
+                    <option selected="@(stock.StockId == Model.StockId)" value="@stock.StockId">@stock.Device.Name: @stock.Count</option>
+                }
+            </select>
+        </div>
+        <div class="col-12">
+            <label class="visually-hidden" for="value">Количество для добавления:</label>
+            <input type="number" value="@Model.Value" id="value" name="value" />
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Подтвердить</button>
+    </div>
+</form>

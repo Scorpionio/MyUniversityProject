@@ -1,0 +1,47 @@
+﻿@model ComputerDevicesShop.Models.DTOs.DetailDTO
+@{
+    var UserAuth = ViewBag.UserAuth as string;
+}
+
+
+
+<div class="main__item item-delails" style="width: max-content">
+    <h1 class="item-delails__title">Страничка товара</h1>
+    <div class="item-delails__box">
+        <img src="#" alt="Фото товара" class="main__item-img">
+        <div class="main__item-inner">
+            <div class="main__item-box">
+                <ul class="main__item-info">
+                    <li class="item-delails__list-item">Название: @Model.Device.Name</li>
+                    <li class="item-delails__list-item">Цена: @Model.Device.Price руб.</li>
+                    <li class="item-delails__list-item">Описание: @Model.Device.Description</li>
+                    <li class="item-delails__list-item">Категория: @Model.CategoryName </li>
+                    <li>
+                        <div class="button rate star" id="getRating"></div>
+                        <a class="button" href="#" onclick="setRate(@Model.Device.DeviceId)">Сохранить рейтинг</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="item-delails__button-box">
+
+            </div>
+            @if (!(UserAuth is null))
+            {
+                <a class="button" asp-controller="Cart" asp-action="AddItem" asp-route-id="@Model.Device.DeviceId">
+                    Добавить в корзину
+                </a>
+            }
+            else
+            {
+                <a class="button" asp-controller="Account" asp-action="Register">
+                    Добавить в корзину
+                </a>
+            }
+            @if (Model.User != null && (Model.User.RoleId == 2 || Model.User.RoleId == 3))
+            {
+                <a class="button" asp-controller="Admin" asp-action="ChangeItem" asp-route-id="@Model.Device.DeviceId">Изменить товар</a>
+                <a class="button" asp-controller="Admin" asp-action="DeleteItem" asp-route-id="@Model.Device.DeviceId">Удалить товар</a>
+            }
+        </div>
+    </div>
+</div>

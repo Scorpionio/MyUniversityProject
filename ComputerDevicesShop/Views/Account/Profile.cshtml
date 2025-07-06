@@ -1,0 +1,10 @@
+﻿@model ComputerDevicesShop.Models.DTOs.ProfileRole
+
+@if (Model.User.RoleId == 2 || Model.User.RoleId == 3)
+{
+	<a class="button" asp-controller="Admin" asp-action="AdminPage">Панель администратора</a>
+}
+
+<div>
+	<a asp-controller="Order" asp-action="OrdersList">Посмотреть список заказов</a>
+</div>

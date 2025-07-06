@@ -1,0 +1,78 @@
+﻿@model ComputerDevicesShop.Models.DTOs.AllSalesDTO
+@{
+    var UserAuth = ViewBag.UserAuth as string;
+}
+
+<div class="form__inner">
+    <h2 class="form__title">Заказы по дате:</h2>
+    <form class="form__box" asp-action="AllSales" asp-controller="Admin" asp-anti-forgery="true">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="acconut__input">
+            <div class="form-group form-valid">
+                <label asp-for="@Model.DateFrom" for="dateFrom">Дата от:</label>
+                <input type="date" asp-for="@Model.DateFrom" id="dateFrom" name="dateFrom" />
+                <span asp-validation-for="@Model.DateFrom"></span>
+            </div>
+            <div class="form-group form-valid">
+                <label asp-for="@Model.DateTo" for="dateTo">Дата до:</label>
+                <input type="date" asp-for="@Model.DateTo" id="dateTo" name="dateTo" />
+                <span asp-validation-for="@Model.DateTo"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Подтвердить" class="button" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div>
+    <div class="block order">
+        <h1>Все заказы:</h1>
+        <div class="order__user-info">
+            @foreach (var order in Model.Orders)
+            {
+                <div class="order-info">
+                    <div class="order-info__main-info">
+                        <p>Название заказа: @order.Name</p>
+                        <p>Почта заказа: @order.Email</p>
+                        <p>Дата заказа: @order.CreateDate.ToString("dd-MM-yyyy")</p>
+                        <p>Статус заказа: @order.OrderStatus.StatusName</p>
+                    </div>
+                    @foreach (var item in order.OrderDetail)
+                    {
+                        <ul class="order__user-goods">
+                            <li>Название товара: @item.Device.Name</li>
+                            <li>Категория товара: @item.Device.Category.Name</li>
+                            <li>Количество: @item.Quantity</li>
+                            <li>Цена товара: @item.UnitPrice</li>
+                            <li>Сумма за товар: @(item.Quantity * item.UnitPrice)</li>
+
+                        </ul>
+                    }
+                    <h2>Общая сумма заказа: @(order.OrderDetail.Select(item => item.UnitPrice * item.Quantity).Sum())</h2>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@* @foreach (var order in Model.Orders) *@
+@* { *@
+@*     <ul> *@
+@*         <li>@order.CreateDate.ToString("dd-MM-yyyy")</li> *@
+@*         <li>@order.UserId</li> *@
+@*         <li>@order.Name</li> *@
+@*         <li>@order.OrderStatus.StatusName</li> *@
+@*         <li>@order.IsPaid</li> *@
+@*     </ul> *@
+@*     @foreach (var item in order.OrderDetail) *@
+@*     { *@
+@*         <div class="order__user-goods"> *@
+@*             <p>@item.Device.Name</p> *@
+@*             <p>@item.Device.Category</p> *@
+@*             <p>@item.Device.Price</p> *@
+@*             <p>@item.Quantity</p> *@
+@*         </div> *@
+@*     } *@
+@* } *@

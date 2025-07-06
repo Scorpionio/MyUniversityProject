@@ -1,0 +1,41 @@
+﻿@model ComputerDevicesShop.Models.DTOs.GoodsInfoDTO
+
+<form method="get" asp-action="GoodsInfo">
+	<div>
+		<label for="sortValue"></label>
+		<select class="form-select" id="sortValue" name="sortValue">
+			<option selected value="All_info">Вся информация</option>
+			<option value="High_rate">Самые популярные товары</option>
+			<option value="NotHigh_rate">Самые не популярные товары</option>
+			<option value="Most_sale">Самые продаваемые товары</option>
+			<option value="NotMost_sale">Самые редко покупаемые товары</option>
+			<option value="Most_benefit">Самые выгодные к продаже товары</option>
+			<option value="NotMost_benefit">Самые не выгодные к продаже товары</option>
+		</select>
+	</div>
+	<div>
+		<button type="submit">Подтвердить</button>
+	</div>
+</form> 
+
+
+<div class="">
+    <div class="block order">
+        <h1>Список:</h1>
+        <div class="order__user-info">
+			@foreach (var item in Model.DevicesInfo)
+			{
+				<div class="order-info">
+					<div class="device">
+						<h2>@item.Device.Name</h2>
+						<p>Цена: @item.Device.Price</p>
+						<p>Рейтинг: @(item.Device.Rate ?? 0)</p>
+						<p>Количество продаж: @item.TotalQuantity</p>
+						<p>Выручка: @item.TotalRevenue</p>
+					</div>
+
+				</div>
+			}
+        </div>
+    </div>
+</div>
